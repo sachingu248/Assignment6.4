@@ -1,4 +1,4 @@
-## Assignment 6.3 — Overflow & Layout Fixing
+## Assignment 6.4 — Positioning Practice
 
 ### 1. `index.html`
 
@@ -7,41 +7,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CSS Overflow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Positioning</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>CSS Overflow Examples</h1>
 
-    <h2>Overflow: Visible</h2>
-    <div class="box visible">
-        This is sample content. This text overflows the fixed-size container and remains visible outside it.
-    </div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+    </nav>
 
-    <h2>Overflow: Hidden</h2>
-    <div class="box hidden">
-        This is sample content. Extra text is hidden when it exceeds the container height.
-    </div>
+    <section id="home">
+        <h1>Welcome</h1>
+        <p>This page demonstrates CSS positioning.</p>
+    </section>
 
-    <h2>Overflow: Auto</h2>
-    <div class="box auto">
-        This is sample content. Extra text appears through scrolling when required. 
-        More content is added here to demonstrate overflow behavior.
-        More content is added here to demonstrate overflow behavior.
-    </div>
+    <section id="about">
+        <h2>About Us</h2>
+        <div class="card">
+            <span class="badge">NEW</span>
+            <h3>Our Club</h3>
+            <p>Learn and grow with us.</p>
+        </div>
+    </section>
 
-    <h2>Overflow: Scroll</h2>
-    <div class="box scroll">
-        This is sample content. Scroll to read the remaining text.
-        More content is added here.
-        More content is added here.
-    </div>
+    <section id="services">
+        <h2>Our Services</h2>
+        <p>We provide learning resources and workshops.</p>
+    </section>
 
-    <h2>Fixed Layout</h2>
-    <div class="fixed">
-        This container uses overflow auto to prevent content from breaking the layout.
-        Extra content can be viewed using the scrollbar.
-    </div>
+    <a class="contact" href="mailto:club@example.com">Contact Us</a>
+
 </body>
 </html>
 ```
@@ -51,49 +49,65 @@
 ```css
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
     background: #f0f4f8;
 }
 
-.box, .fixed {
-    width: 300px;
-    height: 100px;
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: navy;
+    padding: 18px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+section {
+    min-height: 500px;
+    padding: 30px;
+}
+
+.card {
+    position: relative;
+    max-width: 300px;
+    padding: 25px;
+    background: white;
     border: 2px solid navy;
-    padding: 10px;
-    margin-bottom: 30px;
-    background: lightblue;
+    border-radius: 10px;
 }
 
-.visible {
-    overflow: visible;
+.badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: orange;
+    padding: 8px;
+    z-index: 2;
 }
 
-.hidden {
-    overflow: hidden;
-}
-
-.auto {
-    overflow: auto;
-}
-
-.scroll {
-    overflow: scroll;
-}
-
-.fixed {
-    max-width: 100%;
-    box-sizing: border-box;
-    overflow: auto;
-    background: lightyellow;
+.contact {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 200;
+    background: green;
+    color: white;
+    padding: 15px;
+    border-radius: 25px;
+    text-decoration: none;
 }
 ```
 
-### 3. Explanation
+**Explanation:**
+- `sticky`: Keeps navigation at the top while scrolling.
+- `fixed`: Keeps the contact button in the viewport.
+- `relative`: Sets the positioning context for the card.
+- `absolute`: Positions the badge inside the card.
+- `z-index`: Controls overlapping element order.
 
-- `visible`: Overflowing content remains visible.
-- `hidden`: Extra content is clipped.
-- `auto`: Scrollbars appear when needed.
-- `scroll`: Scrollbars are provided.
-- `overflow: auto`: Helps prevent content from breaking the layout.
-
-**Submission:** Open the page using Live Server, test each container, and take a screenshot showing the overflow examples and fixed layout.
+**Submission:** Open with Live Server, scroll through the sections, and take a screenshot showing the navbar, badge, and floating contact button.
